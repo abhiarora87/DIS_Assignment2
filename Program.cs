@@ -78,51 +78,154 @@ namespace DIS_Assignment2
         // Question 1 to find the index of the target number in the array.
         public static int SearchInsert(int[] nums, int target)
         {
+            int value = 0;
+
+            //Input validation using try block
             try
             {
-                // Write your code here
-            }
+                Boolean begin = false;
+
+                //variable to parse the array
+                int i;
+
+                //For loop for location the value in the array
+                for (i = 0; i < nums.Length; i++)
+                {
+                    //if the element is found in the array
+                    if (nums[i] == target || nums[i] > target)
+                    {
+                        begin = true;
+                        value = i;
+                        break;
+                    }
+                }//Loop Ends
+
+                //If not found in the array
+                if (!begin)
+                {
+                    return nums.Length;
+                    //Returning the current array's length where the target value can be inserted
+                }
+
+                return value;
+
+            }//Ending try block
+
+            //to show exception message
             catch
             {
                 Console.WriteLine("Exception occured while computing SearchInsert()");
-            }
+            } //Ending catch block
 
-            return 0;
-        }
+            return value;
+        }//End of the method SearchInsert()
+        // ===================================================================================================//
 
+        // Question 2 :Function displays Intersection of arr1[] and arr2[]
         public static int[] Intersect(int[] nums1, int[] nums2)
         {
+            //validating user input
             try
             {
-                // Write your code here
-            }
+                int i = 0, j = 0; // declaring variables for using in the while loop
+
+                //Defining range 
+                while (i < nums1.Length && j < nums2.Length)
+                {
+                    if (nums1[i] < nums2[j])
+                        i++;
+
+                    else if (nums2[j] < nums1[i])
+                        j++;
+
+                    else
+                    {
+                        Console.Write(nums2[j++] + ",");
+                        i++;
+                    }
+                }//while loop ends
+            }//Ending try block
+
+            //Using catch block to give exception message
             catch
             {
                 Console.WriteLine("Exception occured while computing Intersect()");
-            }
+            }//End of catch block
 
-            return new int[] { };
+            return new int[] { };//Returing the resulting interacted array
         }
+        // ===========================================================================================//
 
+        //Question 3: Method to print largest unique number in a given array
         public static int LargestUniqueNumber(int[] A)
         {
+            int maxValue = 0;
+
+            //Using try block to validate user input
             try
             {
-                // Write your code here
-            }
+                // Using reference from code https://bit.ly/2nsrRi0 to check the element occurs once in the array.
+                var singles = A.GroupBy(x => x).Where(g => !g.Skip(1).Any()).SelectMany(g => g);
+
+                //Using IF condition to check the whether it is not empty.
+                if (singles.Count() != 0)
+                {
+                    maxValue = singles.Max(); //To find the largest element in the resulting array
+                }
+                else
+                    return -1;
+
+            }//Ending try block
+
+            //Using catch block to show exception if error encountered
             catch
             {
                 Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
-            }
+            }//Ending catch block
 
-            return 0;
-        }
+            return maxValue;
 
+        }//End ofmethod
+        // ===========================================================================================//
+
+        // Question 4 //
         public static int CalculateTime(string keyboard, string word)
         {
+            //Checking for constriants  
             try
             {
-                // Write your code here
+                // setting keyboard and word characters to lower case.
+                keyboard = keyboard.ToLower();
+                word = word.ToLower();
+
+                //verifying for keyboard has 26 characters and the word length is allowed
+                if (keyboard.Length != 26 || word.Length < 1 || word.Length > 10000)
+                {
+                    return -1;
+                }
+                //Using a blank ditionary to hold all the keyboard values
+                Dictionary<int, int> key = new Dictionary<int, int>();
+                foreach (char a in keyboard)
+                {
+                    //adding each keyboard character to dictionary and its corresponding index number
+                    if (!key.ContainsKey(a))
+                        key[a] = keyboard.IndexOf(a);
+                }
+
+                //initializing the time counter
+                int totaltime = 0;
+
+                // intial previous position for parseing through keyboard
+                char prev = keyboard[0];
+
+                // iterating through word and getting the absolute value of the length between index positions
+                foreach (char curr in word.ToCharArray())
+                {
+                    totaltime += Math.Abs(key.GetValueOrDefault(curr) - key.GetValueOrDefault(prev));
+                    prev = curr;
+                }
+                //return length of time
+                return totaltime;
             }
             catch
             {
