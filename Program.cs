@@ -15,12 +15,12 @@ namespace DIS_Assignment2
 
             int[] nums1 = { 1, 2, 2, 1 };
             int[] nums2 = { 2, 2 };
-            int[] intersect = Intersect(nums1, nums2);
             Console.WriteLine("Intersection of two arrays is: ");
+            int[] intersect = Intersect(nums1, nums2);
             DisplayArray(intersect);
             Console.WriteLine("\n");
 
-            int[] A = { 5, 7, 3, 9, 4, 9, 8, 3, 1 };
+            int[] A = { 5, 7, 3, 9, 4, 9, 8, 8, 1 };
             Console.WriteLine("Largest integer occuring once = {0}\n", LargestUniqueNumber(A));
 
             string keyboard = "abcdefghijklmnopqrstuvwxyz";
@@ -41,7 +41,7 @@ namespace DIS_Assignment2
             int[] sortedSquares = SortedSquares(arr);
             Console.WriteLine("Squares of the array in sorted order is:");
             DisplayArray(sortedSquares);
-            Console.Write("\n");
+            Console.WriteLine("\n");
 
             string s = "abca";
             if (ValidPalindrome(s))
@@ -74,155 +74,55 @@ namespace DIS_Assignment2
             }
         }
 
-        //Custom method to search and insert target in the nums array
+        // ===================================================================================//
+        // Question 1 to find the index of the target number in the array.
         public static int SearchInsert(int[] nums, int target)
         {
-            //Declaring index for using it in return method
-            int index = 0;
-
-            //Using try block to validate the input
             try
             {
-                //Declaring boolean variable
-                Boolean found = false;
-
-                //Declaring i variable to iterate the array
-                int i;
-
-                //Using for loop to find the element in the array
-                for (i = 0; i < nums.Length; i++)
-                {
-                    //if the element is found in the array
-                    if (nums[i] == target || nums[i] > target)
-                    {
-                        found = true;
-                        index = i;
-                        break;
-                    }
-                }//End of for loop
-                //If the element is not found in the array
-                if (!found)
-                {
-                    return nums.Length;//Returning the lenghth of the array as the position to insert
-                }
-                //It's a return method
-                return index;
-
-            }//End of try block
-
-            //Using catch block to show exception message
+                // Write your code here
+            }
             catch
             {
                 Console.WriteLine("Exception occured while computing SearchInsert()");
-            } //End of catch block
+            }
 
-            return index;
-        }//End of the custom method SearchInsert()
+            return 0;
+        }
 
-        // Function prints Intersection of arr1[] and arr2[]
         public static int[] Intersect(int[] nums1, int[] nums2)
         {
-            //Using try block to validate user input
             try
             {
-                int i = 0, j = 0; // declaring variables to use in the while loop
-
-                while (i < nums1.Length && j < nums2.Length)//Defining range for iteration
-                {
-                    if (nums1[i] < nums2[j])
-                        i++;
-
-                    else if (nums2[j] < nums1[i])
-                        j++;
-
-                    else
-                    {
-                        Console.Write(nums2[j++] + " ,");
-                        i++;
-                    }//End of else
-                }//End of while loop
-            }//End of try block
-
-            //Using catch block to give exception message
+                // Write your code here
+            }
             catch
             {
                 Console.WriteLine("Exception occured while computing Intersect()");
-            }//End of catch block
+            }
 
-            return new int[] { };//Returns teh resulting array
+            return new int[] { };
         }
 
-        //Method to print largest unique number in a given array
         public static int LargestUniqueNumber(int[] A)
         {
-            int max = 0;//declaring a variable to use in the condition
-
-            //Using try block to validate user input
             try
             {
-                //Using IEnumerable to make sure the element occurs only once in the array. 
-                //This statement will remove elements that appears more than once in the array
-                //Source for the code: https://bit.ly/2nsrRi0
-
-                var singles = A.GroupBy(x => x).Where(g => !g.Skip(1).Any()).SelectMany(g => g);
-
-                //Using IF condition to check the IEnumberable is not empty.
-                //Source for the code: https://bit.ly/2ob7Xbs
-                if (singles.Count() != 0)
-                {
-                    max = singles.Max(); //Dictionary to find the largest element in the resulting array
-                }
-                //Using else to return -1 if the resulting array of unique elements is empty.
-                else
-                    return -1;
-
-            }//End of try block
-            //Using catch block to show exception if error encountered
+                // Write your code here
+            }
             catch
             {
                 Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
-            }//End of catch block
+            }
 
-            return max; //Its a return method!
-        }//End of the Largest Unique Number method
+            return 0;
+        }
 
         public static int CalculateTime(string keyboard, string word)
         {
             try
             {
-                //constraint checks 
-                // set keyboard characters and word to lower case
-                keyboard = keyboard.ToLower();
-                word = word.ToLower();
-
-                //verify that keyboard has 26 character and the word length is allowed
-                if (keyboard.Length != 26 || word.Length < 1 || word.Length > 10000)
-                {
-                    return -1;
-                }
-                //initialize a blank ditionary to hold all the keyboard values
-                Dictionary<int, int> kb = new Dictionary<int, int>();
-                foreach (char a in keyboard)
-                {
-                    //adding each keyboard character to dictionary and its corresponding index number
-                    if (!kb.ContainsKey(a))
-                        kb[a] = keyboard.IndexOf(a);
-                }
-
-                //initializing time counter as ans
-                int ans = 0;
-
-                // setting the intial previous position for iterating through keyboard
-                char prev = keyboard[0];
-
-                // iterating through word and geting the absolute value of the length between index positions
-                foreach (char curr in word.ToCharArray())
-                {
-                    ans += Math.Abs(kb.GetValueOrDefault(curr) - kb.GetValueOrDefault(prev));
-                    prev = curr;
-                }
-                //return length of time
-                return ans;
+                // Write your code here
             }
             catch
             {
@@ -231,35 +131,36 @@ namespace DIS_Assignment2
 
             return 0;
         }
+        // ===========================================================================================//
 
+        // Question 5 //
         public static int[,] FlipAndInvertImage(int[,] A)
         {
             try
             {
-                //initialize a blan 3x3 multi dimentional array
-                int[,] ans = new int[3, 3];
-                //loop through array to invert and flip
+                //initializing a multi dimentional array
+                int[,] answer5 = new int[3, 3];
+                //looping through array to invert and flip
                 for (int i = 0; i < 3; i++)
                 {
-                    //initilize integer representing last position in an array row
                     int inv = 2;
                     for (int j = 0; j < 3; j++)
                     {
                         //flipping zero's to ones and placing it in the inverted position
                         if (A[i, j] == 0)
                         {
-                            ans[i, inv] = 1;
+                            answer5[i, inv] = 1;
                             inv--;
                         }
                         else
                         {
-                            ans[i, inv] = 0;
+                            answer5[i, inv] = 0;
                             inv--;
                         }
                     }
                 }
                 //return answer after data transformation
-                return ans;
+                return answer5;
             }
             catch
             {
@@ -269,58 +170,54 @@ namespace DIS_Assignment2
             return new int[,] { };
         }
 
-
-        /// <summary>
-        /// The MinMeetingRooms method determines how few meeting rooms will be required based on a meeting schedule.
-        /// </summary>
+        // ====================================================================================================//
+        
+        /// Question6: The MinMeetingRooms method determines how few meeting rooms will be required based on a meeting schedule.
         public static int MinMeetingRooms(int[,] intervals)
         {
-            //declaring variables
-            List<int> startTimes = new List<int>();
-            List<int> endTimes = new List<int>();
-            int maximum = 0;
-            int inUse = 0;
-            int startLoop = 0;
-            int endLoop = 0;
+            int max = 0;
+            int Use = 0;
+            List<int> startime = new List<int>();
+            List<int> endtime = new List<int>();
+            int start = 0;
+            int end = 0;
+
             try
             {
-                //creating lists of all start and end times.
+                //for all start and end times.
                 for (int i = 0; i < intervals.GetLength(0); i++)
                 {
-                    startTimes.Add(intervals[i, 0]);
-                    endTimes.Add(intervals[i, 1]);
+                    startime.Add(intervals[i, 0]);
+                    endtime.Add(intervals[i, 1]);
                 }
-                //sorting start and end time lists
-                startTimes.Sort();
-                endTimes.Sort();
+                //sorting start and end times
+                startime.Sort();
+                endtime.Sort();
 
-                //looping through start and end times lists at the same time
-                while (startLoop < startTimes.Count && endLoop < startTimes.Count)
+                //Loop through start and end times lists 
+                while (start < startime.Count && end < startime.Count)
                 {
-                    //if current entry is a start time
-                    if (startTimes[startLoop] <= endTimes[endLoop])
+                    if (startime[start] <= endtime[end])
                     {
-                        //increment number of rooms in use
-                        inUse++;
+                        Use++;
 
-                        //if current in use is greater than max, overwrite maximum
-                        if (inUse > maximum)
+                        //if use is greater than max then overwrite maximum
+                        if (Use > max)
                         {
-                            maximum = inUse;
+                            max = Use;
                         }
 
-                        //increment starting times iterator
-                        startLoop++;
+                        //increment starting times 
+                        start++;
                     }
 
-                    //if current entry is a end time
                     else
                     {
                         //decrease number in use
-                        inUse--;
+                        Use--;
 
-                        //increment ending times iterator
-                        endLoop++;
+                        //increment ending times
+                        end++;
                     }
                 }
             }
@@ -329,71 +226,68 @@ namespace DIS_Assignment2
                 Console.WriteLine("Exception occured while computing MinMeetingRooms()");
             }
 
-            //return maximum number of required rooms int
-            return maximum;
+            //return final maximum number of required rooms
+            return max;
         }
+        // ==================================================================================================//
+        
 
-        /// <summary>
-        /// The SortedSquares method takes an array of integers sorted in ascencing order, and returns a sorted array of their squares.
-        /// It squares the positive numbers in ascending order, and the negative numbers in descending order. This prevents the use of a second loop required to sort the numbers
-        /// </summary>
-
+        
+        // Question 7 Sorted Squares array
         public static int[] SortedSquares(int[] A)
         {
-            //initalizing an array to hold the output
-            int[] output = new int[A.Length];
-
-            //creating a variable to hold the position of the iterator for positive numbers
-            int pos = 0;
+            //array for holding the output
+            int[] sortedAR = new int[A.Length];
+            int positive = 0;
+            
             try
             {
-
-                //finding the index of the first positive number in the array
+                //Loop for finding the index of the first positive number in the array
                 foreach (int a in A)
                 {
-                    //incrementing the positive iterator each loop
-                    pos++;
+                    positive++;
 
-                    //breaking loop when first positive number is found
+                    //breaking the loop when 1st +ve number is found
                     if (a >= 0)
                     {
                         break;
                     }
                 }
-                //integer to hold negative iterator
-                int neg = pos - 1;
-                //index to hold current position in output array
-                int outputIndex = 0;
 
-                //looping through array from the middle. Going up and down from zero.
-                while (neg >= 0 && pos < A.Length)
+                //variable to hold current position in the output array
+                int outputIndex = 0;
+                int negative = positive - 1;
+                
+
+                //Starting the array from the middle
+                while (negative >= 0 && positive < A.Length)
                 {
-                    //determining if the left or right size number has the biggest square
-                    if (A[neg] * A[neg] < A[pos] * A[pos])
+                    if (A[negative] * A[negative] < A[positive] * A[positive])
                     {
-                        //if negative has the bigger square add to array
-                        output[outputIndex] = A[neg] * A[neg];
-                        neg--;
+                        //Adding to array if negative has a bigger square value
+                        sortedAR[outputIndex] = A[negative] * A[negative];
+                        negative--;
                     }
                     else
                     {
-                        //if positive has the bigger square add to array
-                        output[outputIndex] = A[pos] * A[pos];
-                        pos++;
+                        //Adding to array if positive has a bigger square value
+                        sortedAR[outputIndex] = A[positive] * A[positive];
+                        positive++;
                     }
                     outputIndex++;
                 }
-                //adding remaining negative values to array
-                while (neg >= 0)
+
+                //populating remaining negative values 
+                while (negative >= 0)
                 {
-                    output[outputIndex++] = A[neg] * A[neg];
-                    neg--;
+                    sortedAR[outputIndex++] = A[negative] * A[negative];
+                    negative--;
                 }
                 //adding remaining positive values to array
-                while (pos < A.Length)
+                while (positive < A.Length)
                 {
-                    output[outputIndex++] = A[pos] * A[pos];
-                    pos++;
+                    sortedAR[outputIndex++] = A[positive] * A[positive];
+                    positive++;
                 }
 
             }
@@ -403,23 +297,24 @@ namespace DIS_Assignment2
             }
 
             //returning final array
-            return output;
+            return sortedAR;
         }
-
-        /// <summary>
+        // ========================================================================================================//
+        
         /// The ValidPalindrome method determines whether a string can be a palindrome by removing either 0 or 1 characters.
-        /// </summary>
+        
+        // Question 8: Valud Palindrome //
         public static bool ValidPalindrome(string s)
         {
             try
             {
-                //checking if string is already a palindrome
-                //if so, returning true
+                // Checking for whether the string is already a Palindrome or not
                 if (isPalindrome(s))
                 {
                     return true;
                 }
-                //checking if palindrome by removing each character
+
+                //By removing each character checking for being a Palidrome
                 for (int i = 0; i < s.Length; i++)
                 {
                     //if string without character[i] is a palindrome, return true
@@ -434,16 +329,12 @@ namespace DIS_Assignment2
                 Console.WriteLine("Exception occured while computing ValidPalindrome()");
             }
 
-            //if not a palindrome, and can't be made into a palindrome by removing a character, return false.
             return false;
         }
 
-        /// <summary>
-        /// The isPalindrome method takes a string, and returns a boolean indicating whether it is a palindrome or not
-        /// </summary>
         public static bool isPalindrome(string s)
         {
-            //converting string to char array
+            //converting string to array of 
             char[] stringReversed = s.ToCharArray();
 
             //reversing char array
